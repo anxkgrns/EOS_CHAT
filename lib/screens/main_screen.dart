@@ -34,49 +34,49 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 90, 0, 0),
                 // TODO : padding top 90, left 20
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                // TODO : 왼쪽 정렬,
-                children: [
-                  RichText(
-                    text: const TextSpan(
-                      text: 'Welcome ',
-                      style: TextStyle(
-                        // TODO : letter spacing 1.0, font size 25, color white
-                        letterSpacing: 1.0, fontSize: 25, color: Colors.white
-                      ),
-
-                      children: [
-                        TextSpan(
-                          text: 'to EOS chat',
-                          style: TextStyle(
-                            letterSpacing: 1.0, fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // TODO : 왼쪽 정렬,
+                  children: [
+                    RichText(
+                      text:  TextSpan(
+                        text: 'Welcome ',
+                        style: TextStyle(
+                            // TODO : letter spacing 1.0, font size 25, color white
+                            letterSpacing: 1.0, fontSize: 25, color: Colors.white
+                        ),
+                        children: [
+                          TextSpan(
+                            text : isSignupScreen ? 'to EOS chat':'back',
+                            style: TextStyle(
+                              letterSpacing: 1.0, fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white
+                            )
+                            // TODO : letter spacing 1.0, font size 25, color white, bold
                           )
-                          // TODO : letter spacing 1.0, font size 25, color white, bold
-                        )
-                      ]
+                        ]
+                      )
+                    ),
+                    const SizedBox(
+                      // TODO : height 5.0으로 글 사이 간격 주기
+                      height: 5.0,
+                    ),
+                    Text(
+                      // TODO : spacing 1.0, color white
+                      isSignupScreen? 'Signup to continue':'Login to continue',
+                      style: TextStyle(letterSpacing: 1.0, color: Colors.white),
                     )
-                  ),
-                  const SizedBox(
-                    // TODO : height 5.0으로 글 사이 간격 주기
-                    height: 5.0,
-                  ),
-                  const Text(
-                    // TODO : spacing 1.0, color white
-                    'Signup to continue',
-                    style: TextStyle(letterSpacing: 1.0, color: Colors.white),
-                  )
-                ],
-              ),
+                  ],
+                ),
             ),
           )
         ),
-          Positioned(
+
+          AnimatedPositioned(
             // TODO : top 150
             top: 150,
-            child: Container(
-              // TODO : height 280.0, padding 모두 20, width 핸드폰 가로 길이 – 40
-              height: 280.0,
+            duration: Duration(microseconds: 5000),
+            child: AnimatedContainer(
+              height: isSignupScreen?330.0:290.0,
               padding: EdgeInsets.all(20),
               width: MediaQuery.of(context).size.width - 40,
               // TODO : margin 가로로 양쪽 20
@@ -94,13 +94,20 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                   )
                 ]
               ),
+              duration: Duration(microseconds: 5000),
+              curve: Curves.easeIn,
               child: Column(
                 children: [
                   Row(
                     // TODO : mainAxisAlignment.spaceAround
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly, // spaceAround
+                    mainAxisAlignment: MainAxisAlignment.spaceAround, // spaceAround
                     children: [
                       GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            isSignupScreen = false;
+                          });
+                        },
                         child: Column(
                           children: [
                             Text(
@@ -112,15 +119,20 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                             ),
                             Container(
                               // TODO : margin top만 3, height 2, width 55, color green
-                              margin: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                              margin: EdgeInsets.fromLTRB(0, 3, 0, 20),
                               height: 2,
                               width: 55,
                               color: !isSignupScreen ?Colors.green:Colors.green.withOpacity(0.0),
-                            )
+                            ),
                           ],
                         ),
                       ),
                     GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          isSignupScreen = true;
+                        });
+                      },
                       child: Column(
                         children: [
                           Text(
@@ -132,13 +144,14 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                           ),
                           Container(
                             // TODO : margin top만 3, height 2, width 55, color green
-                            margin: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                            margin: EdgeInsets.fromLTRB(0, 3, 0, 20),
                             height: 2,
                             width: 55,
                             color: isSignupScreen ?Colors.green:Colors.green.withOpacity(0.0),
-                          )
+                          ),
                         ],
-                      )
+                      ),
+
                     )
                     ],
                   ),
@@ -146,32 +159,193 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                     child: Form(
                       child: Column(
                         children: [
-                          TextFormField(
-                            decoration: InputDecoration(
-                              // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
-                              prefixIcon: Icon(Icons.account_circle, color: Palette.iconColor),
-                              enabledBorder: OutlineInputBorder(
-                                // TODO : borderside 색은 palette의 textColot1
-                                borderSide: BorderSide(color: Palette.textColor1),
-                                // TODO : border radius는 모두 35
-                                borderRadius: BorderRadius.all(Radius.circular(35)),
+                          isSignupScreen?
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
+                                  prefixIcon: Icon(Icons.account_circle, color: Palette.iconColor),
+                                  hintText: 'User name',
+                                  enabledBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                  ),
+                                ),
+                              )
+                              :TextFormField(
+                                decoration: InputDecoration(
+                                  // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
+                                  prefixIcon: Icon(Icons.mail, color: Palette.iconColor),
+                                  hintText: 'email',
+                                  enabledBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                  ),
+                                ),
                               ),
-                                focusedBorder: OutlineInputBorder(
+                          SizedBox(
+                            height: 8,
+                          ),
+                          isSignupScreen?
+                            TextFormField(
+                              decoration: InputDecoration(
+                                // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
+                                prefixIcon: Icon(Icons.email, color: Palette.iconColor),
+                                hintText: 'email',
+                                enabledBorder: OutlineInputBorder(
                                   // TODO : borderside 색은 palette의 textColot1
-                                  borderSide: BorderSide(color: Colors.blueAccent),
+                                  borderSide: BorderSide(color: Palette.textColor1),
                                   // TODO : border radius는 모두 35
                                   borderRadius: BorderRadius.all(Radius.circular(35)),
                                 ),
-                            ),
-                          )
+                                focusedBorder: OutlineInputBorder(
+                                  // TODO : borderside 색은 palette의 textColot1
+                                  borderSide: BorderSide(color: Palette.textColor1),
+                                  // TODO : border radius는 모두 35
+                                  borderRadius: BorderRadius.all(Radius.circular(35)),
+                                ),
+                              ),
+                            ):
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
+                                  prefixIcon: Icon(Icons.lock, color: Palette.iconColor),
+                                  hintText: 'password',
+                                  enabledBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                  ),
+                                ),
+                              ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          isSignupScreen?
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
+                                  prefixIcon: Icon(Icons.lock, color: Palette.iconColor),
+                                  hintText: 'password',
+                                  enabledBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                  ),
+                                ),
+                              ):
+                              SizedBox(
+                                height: 0,
+                              )
+
                         ]
                       ),
                     )
-                  )
+                  ),
                 ]
               ),
             )
+          ),
+
+          Positioned(
+            top: isSignupScreen? 430:390,
+            right: 0,
+            left: 0,
+            child: Center(
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                height: 90,
+                width: 90,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(50)
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.lightGreen, Colors.green],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: Offset(0, 1)
+                      )
+                    ]
+                  ),
+                  child: Icon(
+                    Icons.arrow_forward_rounded,
+                    color: Colors.white,
+                  ),
+                )
+              )
+            )
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height -135,
+            right: 0,
+            left: 0,
+            child: Column(
+              children: [
+                Text(
+                  isSignupScreen ?'or Signin with':'or Login with',
+                ),
+
+                SizedBox(
+                  height: 10,
+                ),
+                TextButton.icon(
+                  // TODO : 배경색은 palette의 googleColor
+                  // TODO : 더하기 아이콘 넣고 ‘Google’ 쓰기
+                  onPressed: () {},
+                  icon: Icon(Icons.add),
+                  label: Text('Google'),
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    minimumSize: Size(155, 40),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    backgroundColor: Palette.googleColor,
+                  ),
+                )
+              ],
+            )
           )
+
         ],
       )
     );
