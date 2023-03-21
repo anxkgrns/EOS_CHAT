@@ -71,10 +71,9 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
           )
         ),
 
-          AnimatedPositioned(
+          Positioned(
             // TODO : top 150
             top: 150,
-            duration: Duration(microseconds: 5000),
             child: AnimatedContainer(
               height: isSignupScreen?330.0:290.0,
               padding: EdgeInsets.all(20),
@@ -94,8 +93,8 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                   )
                 ]
               ),
-              duration: Duration(microseconds: 5000),
-              curve: Curves.easeIn,
+              duration: const Duration(milliseconds: 500),
+              curve:Curves.easeIn,
               child: Column(
                 children: [
                   Row(
@@ -103,11 +102,9 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround, // spaceAround
                     children: [
                       GestureDetector(
-                        onTap: (){
-                          setState(() {
+                        onTap: () => setState(() {
                             isSignupScreen = false;
-                          });
-                        },
+                          }),
                         child: Column(
                           children: [
                             Text(
@@ -128,11 +125,10 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                         ),
                       ),
                     GestureDetector(
-                      onTap: (){
-                        setState(() {
+                      onTap: () => setState(() {
                           isSignupScreen = true;
-                        });
-                      },
+                        }),
+
                       child: Column(
                         children: [
                           Text(
@@ -155,131 +151,168 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                     )
                     ],
                   ),
-                  Container(
-                    child: Form(
-                      child: Column(
-                        children: [
-                          isSignupScreen?
+                  if(isSignupScreen)
+                    Container(
+                        child: Form(
+                          child: Column(
+                            children: [
                               TextFormField(
                                 decoration: InputDecoration(
                                   // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
-                                  prefixIcon: Icon(Icons.account_circle, color: Palette.iconColor),
+                                  prefixIcon: Icon(Icons.account_circle,
+                                      color: Palette.iconColor),
                                   hintText: 'User name',
                                   enabledBorder: OutlineInputBorder(
                                     // TODO : borderside 색은 palette의 textColot1
-                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    borderSide: BorderSide(
+                                        color: Palette.textColor1),
                                     // TODO : border radius는 모두 35
-                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(35)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     // TODO : borderside 색은 palette의 textColot1
-                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    borderSide: BorderSide(
+                                        color: Palette.textColor1),
                                     // TODO : border radius는 모두 35
-                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(35)),
                                   ),
                                 ),
-                              )
-                              :TextFormField(
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              TextFormField(
                                 decoration: InputDecoration(
                                   // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
-                                  prefixIcon: Icon(Icons.mail, color: Palette.iconColor),
+                                  prefixIcon: Icon(
+                                      Icons.email, color: Palette.iconColor),
                                   hintText: 'email',
                                   enabledBorder: OutlineInputBorder(
                                     // TODO : borderside 색은 palette의 textColot1
-                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    borderSide: BorderSide(
+                                        color: Palette.textColor1),
                                     // TODO : border radius는 모두 35
-                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(35)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     // TODO : borderside 색은 palette의 textColot1
-                                    borderSide: BorderSide(color: Palette.textColor1),
+                                    borderSide: BorderSide(
+                                        color: Palette.textColor1),
                                     // TODO : border radius는 모두 35
-                                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(35)),
                                   ),
                                 ),
                               ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          isSignupScreen?
-                            TextFormField(
-                              decoration: InputDecoration(
-                                // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
-                                prefixIcon: Icon(Icons.email, color: Palette.iconColor),
-                                hintText: 'email',
-                                enabledBorder: OutlineInputBorder(
-                                  // TODO : borderside 색은 palette의 textColot1
-                                  borderSide: BorderSide(color: Palette.textColor1),
-                                  // TODO : border radius는 모두 35
-                                  borderRadius: BorderRadius.all(Radius.circular(35)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  // TODO : borderside 색은 palette의 textColot1
-                                  borderSide: BorderSide(color: Palette.textColor1),
-                                  // TODO : border radius는 모두 35
-                                  borderRadius: BorderRadius.all(Radius.circular(35)),
-                                ),
-                              ),
-                            ):
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
-                                  prefixIcon: Icon(Icons.lock, color: Palette.iconColor),
-                                  hintText: 'password',
-                                  enabledBorder: OutlineInputBorder(
-                                    // TODO : borderside 색은 palette의 textColot1
-                                    borderSide: BorderSide(color: Palette.textColor1),
-                                    // TODO : border radius는 모두 35
-                                    borderRadius: BorderRadius.all(Radius.circular(35)),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    // TODO : borderside 색은 palette의 textColot1
-                                    borderSide: BorderSide(color: Palette.textColor1),
-                                    // TODO : border radius는 모두 35
-                                    borderRadius: BorderRadius.all(Radius.circular(35)),
-                                  ),
-                                ),
-                              ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          isSignupScreen?
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
-                                  prefixIcon: Icon(Icons.lock, color: Palette.iconColor),
-                                  hintText: 'password',
-                                  enabledBorder: OutlineInputBorder(
-                                    // TODO : borderside 색은 palette의 textColot1
-                                    borderSide: BorderSide(color: Palette.textColor1),
-                                    // TODO : border radius는 모두 35
-                                    borderRadius: BorderRadius.all(Radius.circular(35)),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    // TODO : borderside 색은 palette의 textColot1
-                                    borderSide: BorderSide(color: Palette.textColor1),
-                                    // TODO : border radius는 모두 35
-                                    borderRadius: BorderRadius.all(Radius.circular(35)),
-                                  ),
-                                ),
-                              ):
                               SizedBox(
-                                height: 0,
-                              )
-
-                        ]
-                      ),
+                                height: 8,
+                              ),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
+                                  prefixIcon: Icon(
+                                      Icons.lock, color: Palette.iconColor),
+                                  hintText: 'password',
+                                  enabledBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(
+                                        color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(35)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(
+                                        color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(35)),
+                                  ),
+                                ),
+                              ),
+                            ]
+                          ),
+                        )
                     )
-                  ),
+                  else
+                    Container(
+                        child: Form(
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
+                                  prefixIcon: Icon(
+                                      Icons.mail, color: Palette.iconColor),
+                                  hintText: 'email',
+                                  enabledBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(
+                                        color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(35)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(
+                                        color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(35)),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  // TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
+                                  prefixIcon: Icon(
+                                      Icons.lock, color: Palette.iconColor),
+                                  hintText: 'password',
+                                  enabledBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(
+                                        color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(35)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    // TODO : borderside 색은 palette의 textColot1
+                                    borderSide: BorderSide(
+                                        color: Palette.textColor1),
+                                    // TODO : border radius는 모두 35
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(35)),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              )
+                            ]
+                          ),
+                        )
+                    ),
+
                 ]
               ),
             )
           ),
 
-          Positioned(
+          AnimatedPositioned(
             top: isSignupScreen? 430:390,
             right: 0,
             left: 0,
+            curve: Curves.easeIn,
+            duration: Duration(milliseconds: 500),
             child: Center(
               child: Container(
                 padding: EdgeInsets.all(15.0),
