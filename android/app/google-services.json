@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "621423870446",
+    "project_id": "eos-chat-5acab",
+    "storage_bucket": "eos-chat-5acab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621423870446:android:bac08f3e38691043670eff",
+        "android_client_info": {
+          "package_name": "com.eos.eos_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621423870446-i74r5taidvtcmu7ia67tkdf7hjbov8bs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_xfDPBoac5vxjQ1Ty5SRFL1TBgU95bwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621423870446-i74r5taidvtcmu7ia67tkdf7hjbov8bs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
